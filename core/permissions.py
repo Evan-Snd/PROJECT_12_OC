@@ -29,7 +29,9 @@ class IsCommercial(IsAuthUser):
         super().__init__(['commercial'])
 
     def has_object_permission(self, request, view, obj):
-        has_group_permission = _has_group_permissions(request.user, self.groups)
+        has_group_permission = _has_group_permissions(
+            request.user,
+            self.groups)
         print(has_group_permission)
         if not has_group_permission or not obj.commercial_contact == request.user:
             return False

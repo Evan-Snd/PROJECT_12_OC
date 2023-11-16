@@ -17,11 +17,8 @@ class ClientViewSet(ModelViewSet):
     queryset = Client.objects.all()
     serializer_class = ClientSerializer
 
-    def get_queryset(self):
-        groupe = Group.objects.all()
-        print(groupe)
-        print(self.request.user)
-        return super().get_queryset()
+    def perform_create(self, serializer):
+        serializer.save(commercial_contact=self.request.user)
 
 
 class ContractViewSet(ModelViewSet):
@@ -29,8 +26,14 @@ class ContractViewSet(ModelViewSet):
     queryset = Contract.objects.all()
     serializer_class = ContractSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(gestion_contact=self.request.user)
+
 
 class EventViewset(ModelViewSet):
     permission_classes = [IsSupport, IsGestion]
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(commercial=self.request.user)
