@@ -63,8 +63,8 @@ class Event(models.Model):
                                 blank=True,
                                 related_name='event_support')
     client_contact = models.TextField()
-    event_date_start = models.DateTimeField()
-    event_date_end = models.DateTimeField()
+    event_date_start = models.DateField()
+    event_date_end = models.DateField()
     location = models.CharField(max_length=255)
     attendees = models.IntegerField()
     notes = models.TextField()

@@ -31,7 +31,7 @@ class ContractViewSet(ModelViewSet):
 
 
 class EventViewset(ModelViewSet):
-    permission_classes = [IsSupport, IsGestion]
+    permission_classes = [IsCommercial | IsGestion | IsSupport]
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
